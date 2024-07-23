@@ -1,0 +1,62 @@
+export const shipTypes: ShipType[] = [
+  {
+    key: 'cargo',
+    label: 'Marchandises',
+    aisTypes: ['cargo'],
+    color: '#78f48b' // green
+  },
+  {
+    key: 'tanker',
+    label: 'Tanker',
+    aisTypes: ['tanker'],
+    color: '#ff272d' // red
+  },
+  {
+    key: 'passenger',
+    label: 'Passagers',
+    aisTypes: ['passenger'],
+    color: '#0623c9' // dark blue
+  },
+  {
+    key: 'submarine',
+    label: 'Opérations sous-marines',
+    aisTypes: ['towing', 'dredger', 'diving'],
+    color: '#1adde5' // teal
+  },
+  {
+    key: 'tug',
+    label: 'Remorquage',
+    aisTypes: ['tug'],
+    color: '#9a460f' // brown
+  },
+  {
+    key: 'fishing',
+    label: 'Pêche',
+    aisTypes: ['fishing'],
+    color: '#f78851' // orange
+  },
+  {
+    key: 'leisure',
+    label: 'Plaisance',
+    aisTypes: ['sailing', 'leisure'],
+    color: '#ff29ff' // pink
+  },
+  {
+    key: 'military',
+    label: 'Militaire',
+    aisTypes: ['military'],
+    color: '#5910d0' // purple
+  },
+  {
+    key: 'other',
+    label: 'Autre',
+    aisTypes: ['other'],
+    color: '#e1cf15' // yellow
+  },
+  {
+    key: 'default',
+    label: 'Non spécifié',
+    aisTypes: ['unspecified'],
+    color: '#cccccc'
+  }
+]
