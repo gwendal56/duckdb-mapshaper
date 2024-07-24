@@ -325,3 +325,101 @@ TO '/Users/gwendalleguellec/Documents/DuckDB/density_flag_type/JSON/output/densi
 WITH (FORMAT GDAL, DRIVER 'GeoJSON');
 
 --style stroke=color
+
+
+
+
+
+
+
+
+
+-- Densités séparées par type
+
+CREATE OR REPLACE TABLE world1Fishing AS
+	SELECT h3_cell_to_lng(h3) AS lng, H3Index, geom, SUM(nb), nb, ShipType, '#f78851' as color
+	FROM world
+	WHERE ShipType = 'fishing' 
+	GROUP BY lng, H3Index, geom, nb, ShipType;
+
+CREATE OR REPLACE TABLE world1Cargo AS
+	SELECT h3_cell_to_lng(h3) AS lng, H3Index, geom, SUM(nb), nb, ShipType, '#78f48b' as color
+	FROM world
+	WHERE ShipType = 'cargo' 
+	GROUP BY lng, H3Index, geom, nb, ShipType;
+
+CREATE OR REPLACE TABLE world1Tanker AS
+	SELECT h3_cell_to_lng(h3) AS lng, H3Index, geom, SUM(nb), nb, ShipType, '#ff272d' as color
+	FROM world
+	WHERE ShipType = 'tanker' 
+	GROUP BY lng, H3Index, geom, nb, ShipType;
+
+CREATE OR REPLACE TABLE world1Other AS
+	SELECT h3_cell_to_lng(h3) AS lng, H3Index, geom, SUM(nb), nb, ShipType, '#cccccc' as color
+	FROM world
+	WHERE ShipType != 'tanker' AND ShipType != 'cargo' AND ShipType != 'fishing' 
+	GROUP BY lng, H3Index, geom, nb, ShipType;
+
+--
+CREATE OR REPLACE TABLE world2Fishing AS
+	SELECT lng, H3Index, geom, nb, ShipType, color
+	FROM world1Fishing
+	WHERE nb = (
+			FROM world AS h
+			SELECT MAX(nb)
+			WHERE h.H3Index = world1Fishing.H3Index
+			AND world1Fishing.lng > -177 AND world1Fishing.lng < 177
+	);
+
+CREATE OR REPLACE TABLE world2Cargo AS
+	SELECT lng, H3Index, geom, nb, ShipType, color
+	FROM world1Cargo
+	WHERE nb = (
+			FROM world AS h
+			SELECT MAX(nb)
+			WHERE h.H3Index = world1Cargo.H3Index
+			AND world1Cargo.lng > -177 AND world1Cargo.lng < 177
+	);
+
+CREATE OR REPLACE TABLE world2Tanker AS
+	SELECT lng, H3Index, geom, nb, ShipType, color
+	FROM world1Tanker
+	WHERE nb = (
+			FROM world AS h
+			SELECT MAX(nb)
+			WHERE h.H3Index = world1Tanker.H3Index
+			AND world1Tanker.lng > -177 AND world1Tanker.lng < 177
+	);
+
+CREATE OR REPLACE TABLE world2Other AS
+	SELECT lng, H3Index, geom, nb, ShipType, color
+	FROM world1Other
+	WHERE nb = (
+			FROM world AS h
+			SELECT MAX(nb)
+			WHERE h.H3Index = world1Other.H3Index
+			AND world1Other.lng > -177 AND world1Other.lng < 177
+	);
+
+
+COPY world2Fishing
+TO '/Users/gwendalleguellec/Documents/DuckDB/density_flag_type/JSON/output/world2Fishing.json'
+WITH (FORMAT GDAL, DRIVER 'GeoJSON');
+--classify field=nb colors=Oranges
+
+COPY world2Cargo
+TO '/Users/gwendalleguellec/Documents/DuckDB/density_flag_type/JSON/output/world2Cargo.json'
+WITH (FORMAT GDAL, DRIVER 'GeoJSON');
+--classify field=nb colors=Greens
+
+COPY world2Tanker
+TO '/Users/gwendalleguellec/Documents/DuckDB/density_flag_type/JSON/output/world2Tanker.json'
+WITH (FORMAT GDAL, DRIVER 'GeoJSON');
+--classify field=nb colors=Reds
+
+COPY world2Other
+TO '/Users/gwendalleguellec/Documents/DuckDB/density_flag_type/JSON/output/world2Other.json'
+WITH (FORMAT GDAL, DRIVER 'GeoJSON');
+--classify field=nb colors=Greys
+
+
