@@ -47,3 +47,5 @@ style stroke=d.fill
 # Dissolve all features into a single feature by a common field
 dissolve stroke
 ```
+
+![Mapshaper](mapshaper.png)
