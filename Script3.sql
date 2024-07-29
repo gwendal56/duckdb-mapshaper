@@ -1,9 +1,5 @@
-INSTALL H3 FROM community;
 LOAD H3;
-
-FORCE INSTALL SPATIAL FROM 'http://nightly-extensions.duckdb.org';
 LOAD SPATIAL;
-
 
 -- ============================================ 2023 - World (Fishing China-Taiwan)
 
