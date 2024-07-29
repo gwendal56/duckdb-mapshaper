@@ -47,6 +47,12 @@ LOAD H3;
 LOAD SPATIAL ;
 ```
 
+- To set the path from where Parquet files are read :
+
+```sql
+SET file_search_path = '/absolute/path/from/where/parquet/files/are/read';
+```
+
 - To use the coordinates of a H3 cell feature, you can use the following command (for export to GeoJSON for example) :
 
 ```sql
