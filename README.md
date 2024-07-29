@@ -41,9 +41,9 @@ Fast SQL database management system.
 
 ```sql
 INSTALL H3 FROM community;
-LOAD H3;
-
 FORCE INSTALL SPATIAL FROM 'http://nightly-extensions.duckdb.org';
+
+LOAD H3;
 LOAD SPATIAL ;
 ```
 
