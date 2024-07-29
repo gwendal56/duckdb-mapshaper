@@ -1,14 +1,4 @@
---MapShaper examples :
---classify field=ShipType colors="random" \
---style stroke=grey
-
---classify field=ShipType colors="#83bcb6AA,#4c78a8AA,#f58518AA,#f2cf5bAA,#9ecae9AA,#54a24bAA,#d6a5c9AA" \
---style stroke=d.fill
-
-INSTALL H3 FROM community;
 LOAD H3;
-
-FORCE INSTALL SPATIAL FROM 'http://nightly-extensions.duckdb.org';
 LOAD SPATIAL ;
 
 --  =========================================== 012.5
