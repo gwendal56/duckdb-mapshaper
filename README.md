@@ -47,6 +47,12 @@ FORCE INSTALL SPATIAL FROM 'http://nightly-extensions.duckdb.org';
 LOAD SPATIAL ;
 ```
 
+- To use the coordinates of a H3 cell feature, you can use the following command (for export to GeoJSON for example) :
+
+```sql
+... h3_cell_to_boundary_wkt(H3Index).st_geomfromtext() ...
+```
+
 - To manage anti-meridian, you can choose an interval for the longitude values :
     
 ```sql
