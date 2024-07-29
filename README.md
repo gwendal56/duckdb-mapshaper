@@ -62,7 +62,7 @@ LOAD SPATIAL ;
 
 ... h3_cell_to_lng(h3) AS lng ... -- get the longitude value from the H3 string
 
-... lng > -177 AND lng < 177 ... -- filter the longitude values between -177 and 177
+... lng > -179 AND lng < 179 ... -- filter the longitude values between -177 and 177
 
 ```
 
