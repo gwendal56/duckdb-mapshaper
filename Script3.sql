@@ -1,11 +1,13 @@
 LOAD H3;
 LOAD SPATIAL;
 
+SET file_search_path = '/Users/gwendalleguellec/Documents/DuckDB/density_flag_type/PARQUET/';
+
 -- ============================================ 2023 - World (Fishing China-Taiwan)
 
 CREATE OR REPLACE TABLE world_raw AS
 	SELECT * 
-	FROM read_parquet('/Users/gwendalleguellec/Documents/DuckDB/density_flag_type/PARQUET/density.2023.parquet');
+	FROM 'density.2023.parquet';
 
 CREATE OR REPLACE TABLE cn_tw AS
 	SELECT 
